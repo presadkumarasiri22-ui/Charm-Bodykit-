@@ -1,0 +1,924 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+<meta name="theme-color" content="#090b12">
+
+<title>MDX Modz Center</title>
+
+<style>
+:root {
+    --bg: #090b12;
+    --card: #131824;
+    --red: #ff303d;
+    --orange: #ff7043;
+    --text: #ffffff;
+    --muted: #a3adbf;
+    --green: #28d99a;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    -webkit-tap-highlight-color: transparent;
+}
+
+body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: Arial, Helvetica, sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    background:
+        radial-gradient(ellipse at 10% 5%,
+        rgba(255,48,61,.15), transparent 45%),
+        radial-gradient(ellipse at 95% 60%,
+        rgba(255,112,67,.09), transparent 40%);
+}
+
+button {
+    font: inherit;
+    cursor: pointer;
+}
+
+header {
+    height: 66px;
+    padding: 0 17px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid rgba(255,255,255,.08);
+    background: rgba(9,11,18,.93);
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    backdrop-filter: blur(12px);
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+}
+
+.logo {
+    height: 43px;
+    width: 43px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 17px;
+    font-weight: 1000;
+    font-style: italic;
+    border-radius: 12px;
+    background: linear-gradient(135deg,#ff303d,#ff7043);
+    box-shadow: 0 0 22px rgba(255,48,61,.25);
+}
+
+.brand-name {
+    font-size: 15px;
+    font-weight: 900;
+    letter-spacing: .2px;
+}
+
+.brand-sub {
+    font-size: 10px;
+    color: var(--muted);
+    margin-top: 4px;
+    letter-spacing: 1.5px;
+}
+
+.status {
+    padding: 7px 10px;
+    font-size: 10px;
+    font-weight: bold;
+    color: var(--green);
+    background: rgba(40,217,154,.09);
+    border: 1px solid rgba(40,217,154,.2);
+    border-radius: 20px;
+}
+
+main {
+    max-width: 620px;
+    margin: auto;
+    padding: 20px 17px 35px;
+}
+
+.hero {
+    margin-top: 9px;
+    padding: 31px 19px;
+    min-height: 270px;
+    border: 1px solid rgba(255,255,255,.09);
+    border-radius: 23px;
+    overflow: hidden;
+    position: relative;
+    background:
+        linear-gradient(135deg,
+        rgba(255,48,61,.15),
+        rgba(19,24,36,.96) 58%),
+        var(--card);
+}
+
+.hero::after {
+    content: "MDX";
+    position: absolute;
+    right: -12px;
+    bottom: -22px;
+    font-size: 100px;
+    font-weight: 1000;
+    font-style: italic;
+    letter-spacing: -10px;
+    color: rgba(255,255,255,.035);
+    pointer-events: none;
+}
+
+.tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: #ff8b91;
+    background: rgba(255,48,61,.10);
+    border: 1px solid rgba(255,48,61,.23);
+    padding: 7px 10px;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 1.3px;
+    border-radius: 8px;
+}
+
+h1 {
+    margin-top: 22px;
+    font-size: clamp(31px, 8vw, 43px);
+    line-height: 1.05;
+    letter-spacing: -1.5px;
+    font-weight: 1000;
+}
+
+h1 span {
+    color: var(--red);
+}
+
+.hero p {
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.8;
+    margin-top: 14px;
+    max-width: 390px;
+}
+
+.section-label {
+    font-size: 11px;
+    font-weight: 900;
+    letter-spacing: 2px;
+    color: var(--muted);
+    margin: 26px 0 12px;
+}
+
+.mod-card {
+    padding: 18px;
+    border-radius: 19px;
+    background: linear-gradient(145deg,#171e2d,#10141e);
+    border: 1px solid rgba(255,255,255,.09);
+    box-shadow: 0 12px 30px rgba(0,0,0,.15);
+}
+
+.mod-top {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.mod-icon {
+    width: 72px;
+    height: 72px;
+    flex-shrink: 0;
+    border-radius: 15px;
+    background: linear-gradient(145deg,#303b50,#141924);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 32px;
+    border: 1px solid rgba(255,255,255,.09);
+}
+
+.mod-info {
+    min-width: 0;
+}
+
+.mod-info h2 {
+    font-size: 17px;
+    line-height: 1.4;
+}
+
+.mod-info p {
+    color: var(--muted);
+    font-size: 11px;
+    margin-top: 7px;
+    line-height: 1.5;
+}
+
+.badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+    margin-top: 17px;
+}
+
+.badge {
+    font-size: 10px;
+    color: #d6dbea;
+    padding: 7px 9px;
+    border-radius: 7px;
+    background: rgba(255,255,255,.055);
+    border: 1px solid rgba(255,255,255,.07);
+}
+
+.divider {
+    height: 1px;
+    background: rgba(255,255,255,.08);
+    margin: 18px 0;
+}
+
+.btn {
+    border: 0;
+    width: 100%;
+    min-height: 51px;
+    padding: 14px 15px;
+    border-radius: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+    font-weight: 900;
+    transition: transform .15s, opacity .15s;
+}
+
+.btn:active {
+    transform: scale(.98);
+}
+
+.btn:disabled {
+    cursor: not-allowed;
+    opacity: .4;
+}
+
+.btn-primary {
+    color: white;
+    background: linear-gradient(110deg,#ff303d,#ff6545);
+    box-shadow: 0 7px 22px rgba(255,48,61,.16);
+}
+
+.btn-dark {
+    color: white;
+    background: #252d3d;
+    border: 1px solid rgba(255,255,255,.09);
+}
+
+.btn-green {
+    color: #07140f;
+    background: var(--green);
+}
+
+.btn-youtube {
+    background: #ff2334;
+    color: white;
+}
+
+.btn + .btn {
+    margin-top: 10px;
+}
+
+.small-note {
+    text-align: center;
+    color: var(--muted);
+    font-size: 10px;
+    line-height: 1.7;
+    margin-top: 12px;
+}
+
+.steps {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 9px;
+}
+
+.step {
+    padding: 13px 8px;
+    text-align: center;
+    border: 1px solid rgba(255,255,255,.07);
+    background: rgba(255,255,255,.025);
+    border-radius: 12px;
+}
+
+.step-number {
+    margin: auto auto 9px;
+    width: 25px;
+    height: 25px;
+    display: grid;
+    place-items: center;
+    border-radius: 8px;
+    color: #ff777f;
+    background: rgba(255,48,61,.12);
+    font-size: 11px;
+    font-weight: 900;
+}
+
+.step strong {
+    display: block;
+    font-size: 10px;
+}
+
+.step span {
+    display: block;
+    margin-top: 5px;
+    color: var(--muted);
+    font-size: 9px;
+    line-height: 1.5;
+}
+
+.panel {
+    display: none;
+    margin-top: 17px;
+    padding: 19px;
+    border-radius: 18px;
+    border: 1px solid rgba(255,255,255,.09);
+    background: var(--card);
+    animation: appear .3s ease;
+}
+
+.panel.active {
+    display: block;
+}
+
+@keyframes appear {
+    from {opacity: 0; transform: translateY(9px);}
+    to {opacity: 1; transform: translateY(0);}
+}
+
+.panel h2 {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.panel-description {
+    color: var(--muted);
+    font-size: 12px;
+    line-height: 1.8;
+    margin-bottom: 17px;
+}
+
+.notice {
+    padding: 12px;
+    border-radius: 10px;
+    color: #ffd99c;
+    background: rgba(255,187,66,.07);
+    border: 1px solid rgba(255,187,66,.15);
+    font-size: 11px;
+    line-height: 1.7;
+    margin: 13px 0;
+}
+
+.success {
+    color: var(--green);
+    font-size: 12px;
+    line-height: 1.7;
+    margin: 12px 0;
+}
+
+.ad-card {
+    padding: 16px;
+    border-radius: 14px;
+    background: #1b2332;
+    border: 1px solid rgba(255,255,255,.08);
+    margin: 12px 0;
+}
+
+.ad-label {
+    display: inline-block;
+    color: #ffce86;
+    background: rgba(255,190,85,.09);
+    border-radius: 5px;
+    padding: 5px 7px;
+    font-size: 9px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    margin-bottom: 11px;
+}
+
+.ad-card h3 {
+    font-size: 17px;
+    margin-bottom: 7px;
+}
+
+.ad-card p {
+    color: var(--muted);
+    font-size: 11px;
+    line-height: 1.7;
+}
+
+.ad-card a {
+    display: inline-block;
+    color: #ff8d93;
+    text-decoration: none;
+    font-size: 11px;
+    font-weight: bold;
+    margin-top: 12px;
+}
+
+.timer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin: 18px auto;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 4px solid #ff3947;
+    box-shadow: 0 0 24px rgba(255,48,61,.10);
+}
+
+.timer strong {
+    font-size: 29px;
+}
+
+.timer span {
+    font-size: 9px;
+    color: var(--muted);
+    margin-top: 4px;
+}
+
+.progress {
+    height: 5px;
+    border-radius: 10px;
+    background: #292f3e;
+    overflow: hidden;
+    margin: 14px 0;
+}
+
+.progress-fill {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg,#ff303d,#ff7043);
+    transition: width .3s linear;
+}
+
+footer {
+    padding: 22px 8px 0;
+    text-align: center;
+    color: #707b8f;
+    font-size: 10px;
+    line-height: 2;
+}
+
+footer strong {
+    color: #cbd2df;
+}
+
+.hidden {
+    display: none !important;
+}
+
+@media (max-width: 370px) {
+    main {
+        padding-left: 12px;
+        padding-right: 12px;
+    }
+
+    .hero {
+        padding: 25px 15px;
+    }
+
+    .mod-card {
+        padding: 13px;
+    }
+
+    .mod-icon {
+        width: 60px;
+        height: 60px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="brand">
+        <div class="logo">MDX</div>
+        <div>
+            <div class="brand-name">MDX MODZ CENTER</div>
+            <div class="brand-sub">BUSSID MOD DOWNLOADS</div>
+        </div>
+    </div>
+    <div class="status">● ONLINE</div>
+</header>
+
+<main>
+
+    <section class="hero">
+        <div class="tag">✦ OFFICIAL MOD CENTER</div>
+
+        <h1>
+            MDX Modz<br>
+            <span>Center.</span>
+        </h1>
+
+        <p>
+            Discover your favourite BUSSID modifications.
+            Simple access, smooth experience and direct
+            mod downloads.
+        </p>
+    </section>
+
+    <div class="section-label">FEATURED MODIFICATION</div>
+
+    <section class="mod-card">
+        <div class="mod-top">
+            <div class="mod-icon">🚌</div>
+
+            <div class="mod-info">
+                <h2>Charm Bodykit V3.7.1</h2>
+                <p>
+                    MDX Modification Bussid LK<br>
+                    BUSSID Modification Pack
+                </p>
+            </div>
+        </div>
+
+        <div class="badges">
+            <span class="badge">BUSSID</span>
+            <span class="badge">BODYKIT</span>
+            <span class="badge">ZIP FILE</span>
+            <span class="badge">V3.7.1</span>
+        </div>
+
+        <div class="divider"></div>
+
+        <button class="btn btn-primary" id="getBtn"
+        onclick="showSubscribe()">
+            <span>⬇</span> GET MOD
+        </button>
+
+        <p class="small-note">
+            Follow the steps below to access the download.
+        </p>
+    </section>
+
+    <div class="section-label">HOW IT WORKS</div>
+
+    <section class="steps">
+        <div class="step">
+            <div class="step-number">01</div>
+            <strong>Get Mod</strong>
+            <span>Start here</span>
+        </div>
+
+        <div class="step">
+            <div class="step-number">02</div>
+            <strong>Subscribe</strong>
+            <span>Visit channel</span>
+        </div>
+
+        <div class="step">
+            <div class="step-number">03</div>
+            <strong>Download</strong>
+            <span>Get your mod</span>
+        </div>
+    </section>
+
+    <!-- SUBSCRIBE PANEL -->
+
+    <section class="panel" id="subscribePanel">
+        <h2>Support MDX Modification</h2>
+
+        <p class="panel-description">
+            Visit our YouTube channel and subscribe if you
+            enjoy our BUSSID mods. Return here afterward
+            to continue.
+        </p>
+
+        <button class="btn btn-youtube"
+        onclick="openYouTube()">
+            ▶ SUBSCRIBE & GO TO MOD
+        </button>
+
+        <div class="notice">
+            YouTube subscription status cannot be verified
+            automatically by this standalone website.
+            Please confirm honestly after subscribing.
+        </div>
+
+        <button class="btn btn-dark"
+        onclick="confirmSubscribe()">
+            ↩ I SUBSCRIBED — CONTINUE
+        </button>
+
+        <p class="small-note">
+            Already subscribed? You can continue too.
+        </p>
+    </section>
+
+    <!-- DOWNLOAD PANEL -->
+
+    <section class="panel" id="downloadPanel">
+        <h2>✓ Download Unlocked</h2>
+
+        <p class="panel-description">
+            You can now continue to the mod download.
+        </p>
+
+        <div class="success">
+            ✓ Access confirmed on this device.
+        </div>
+
+        <button class="btn btn-primary"
+        onclick="showAds()">
+            ⬇ DOWNLOAD MOD
+        </button>
+
+        <p class="small-note">
+            Next: Sponsor messages, then MediaFire.
+        </p>
+    </section>
+
+    <!-- SPONSOR ADS PANEL -->
+
+    <section class="panel" id="adsPanel">
+        <h2>Support Our Sponsors</h2>
+
+        <p class="panel-description">
+            Take a look at these promotional cards while
+            your download link is being prepared.
+        </p>
+
+        <div class="notice">
+            These are demonstration promotions, not verified
+            paid advertisements or official sponsorships.
+        </div>
+
+        <div id="adContainer"></div>
+
+        <div class="timer">
+            <strong id="countdown">8</strong>
+            <span>SECONDS</span>
+        </div>
+
+        <div class="progress">
+            <div class="progress-fill" id="progressFill"></div>
+        </div>
+
+        <p class="small-note" id="adStatus"
+        aria-live="polite">
+            Preparing your download...
+        </p>
+
+        <button class="btn btn-primary"
+        id="continueBtn" disabled
+        onclick="openDownload()">
+            PLEASE WAIT...
+        </button>
+
+        <button class="btn btn-dark"
+        onclick="backToDownload()">
+            ← BACK
+        </button>
+    </section>
+
+    <footer>
+        <strong>MDX MODZ CENTER</strong><br>
+        BUSSID Mods & Custom Modifications<br>
+        Made for the BUSSID community.<br><br>
+        Download files are hosted by MediaFire.
+    </footer>
+
+</main>
+
+<script>
+"use strict";
+
+const YOUTUBE_URL =
+    "https://www.youtube.com/@mdxmodification";
+
+const DOWNLOAD_URL =
+    "https://www.mediafire.com/file/uinrrnh7xdaaz2p/Charm_Bodykit_v3.7.1%2528MDX_Modification_Bussid_Lk%2529.zip/file";
+
+const ads = [
+    {
+        name: "Dialog",
+        title: "Stay Connected",
+        description:
+            "Explore mobile connectivity and digital services in Sri Lanka.",
+        url: "https://www.dialog.lk"
+    },
+    {
+        name: "SLT-MOBITEL",
+        title: "Connect to More",
+        description:
+            "Explore broadband, mobile and digital connectivity services.",
+        url: "https://www.slt.lk"
+    },
+    {
+        name: "PickMe",
+        title: "Explore Local Services",
+        description:
+            "Discover transport and delivery services available through PickMe.",
+        url: "https://pickme.lk"
+    },
+    {
+        name: "Commercial Bank",
+        title: "Banking Services",
+        description:
+            "Explore banking services and digital banking information.",
+        url: "https://www.combank.lk"
+    }
+];
+
+let adTimer = null;
+let remaining = 8;
+let currentAdIndex = 0;
+
+function hideAllPanels() {
+    document.querySelectorAll(".panel").forEach(panel => {
+        panel.classList.remove("active");
+    });
+}
+
+function showSubscribe() {
+    hideAllPanels();
+
+    document.getElementById("subscribePanel")
+        .classList.add("active");
+
+    document.getElementById("subscribePanel")
+        .scrollIntoView({
+            behavior: "smooth",
+            block: "start"
+        });
+}
+
+function openYouTube() {
+    window.open(YOUTUBE_URL, "_blank");
+
+    // A return visit does not prove subscription.
+    // The user must explicitly confirm.
+}
+
+function confirmSubscribe() {
+    const confirmed = confirm(
+        "Have you subscribed to MDX Modification, " +
+        "or were you already subscribed?\n\n" +
+        "Press OK to continue."
+    );
+
+    if (!confirmed) return;
+
+    hideAllPanels();
+
+    document.getElementById("downloadPanel")
+        .classList.add("active");
+
+    document.getElementById("downloadPanel")
+        .scrollIntoView({
+            behavior: "smooth",
+            block: "start"
+        });
+}
+
+function showAds() {
+    hideAllPanels();
+
+    document.getElementById("adsPanel")
+        .classList.add("active");
+
+    document.getElementById("adsPanel")
+        .scrollIntoView({
+            behavior: "smooth",
+            block: "start"
+        });
+
+    startAds();
+}
+
+function startAds() {
+    clearInterval(adTimer);
+
+    remaining = 8;
+    currentAdIndex = 0;
+
+    const continueBtn =
+        document.getElementById("continueBtn");
+
+    continueBtn.disabled = true;
+    continueBtn.textContent = "PLEASE WAIT...";
+
+    document.getElementById("countdown").textContent =
+        remaining;
+
+    document.getElementById("progressFill").style.width =
+        "0%";
+
+    document.getElementById("adStatus").textContent =
+        "Preparing your download...";
+
+    renderAds();
+
+    adTimer = setInterval(() => {
+        remaining--;
+
+        document.getElementById("countdown")
+            .textContent = Math.max(remaining, 0);
+
+        document.getElementById("progressFill")
+            .style.width = ((8 - remaining) / 8 * 100) + "%";
+
+        if (remaining <= 0) {
+            clearInterval(adTimer);
+
+            continueBtn.disabled = false;
+            continueBtn.textContent = "CONTINUE TO DOWNLOAD →";
+
+            document.getElementById("adStatus")
+                .textContent =
+                "Ready! Your MediaFire download is available.";
+        }
+    }, 1000);
+}
+
+function renderAds() {
+    const container =
+        document.getElementById("adContainer");
+
+    // Shuffle the promotional cards on each visit.
+    const shuffled = [...ads].sort(
+        () => Math.random() - 0.5
+    );
+
+    container.innerHTML = "";
+
+    shuffled.slice(0, 3).forEach(ad => {
+        const card = document.createElement("article");
+        card.className = "ad-card";
+
+        const label = document.createElement("span");
+        label.className = "ad-label";
+        label.textContent = "DEMO PROMOTION";
+
+        const title = document.createElement("h3");
+        title.textContent = ad.name + " — " + ad.title;
+
+        const description = document.createElement("p");
+        description.textContent = ad.description;
+
+        const link = document.createElement("a");
+        link.href = ad.url;
+        link.target = "_blank";
+        link.rel = "noopener noreferrer";
+        link.textContent = "VISIT WEBSITE ↗";
+
+        card.append(label, title, description, link);
+        container.appendChild(card);
+    });
+}
+
+function openDownload() {
+    if (remaining > 0) return;
+
+    clearInterval(adTimer);
+
+    window.location.href = DOWNLOAD_URL;
+}
+
+function backToDownload() {
+    clearInterval(adTimer);
+
+    hideAllPanels();
+
+    document.getElementById("downloadPanel")
+        .classList.add("active");
+
+    document.getElementById("downloadPanel")
+        .scrollIntoView({
+            behavior: "smooth",
+            block: "start"
+        });
+}
+
+// If the user returns from YouTube, the page stays ready.
+// They must still press the confirmation button.
+</script>
+
+</body>
+</html>
